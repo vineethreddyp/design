@@ -11,6 +11,7 @@ public class ParkingLot {
   private List<ParkingFloor> parkingFloorList;
   private List<EntryPoint> entryPoints;
   private List<ExitPoint> exitPoints;
+  private String displayBoard;
 
   public ParkingLot(String name, String address){
     this.name = name;
@@ -20,6 +21,30 @@ public class ParkingLot {
     this.exitPoints = new ArrayList<>();
   }
 
+  public void updateDisplayBoard(){
+
+    // TODO fix this procedure
+    for(ParkingFloor parkingFloor : parkingFloorList){
+
+      for(ParkingSpot parkingSpot : parkingFloor.getParkingSpotList()){
+
+        if(parkingSpot.isFree()){
+
+          if(parkingSpot instanceof ElectricSpot){
+
+          }
+
+
+        }
+
+        if(parkingSpot.getClass().equals(ElectricSpot.class)){
+
+        }
+
+      }
+
+    }
+  }
 
   public List<ParkingFloor> getParkingFloorList() {
     return parkingFloorList;
@@ -31,5 +56,9 @@ public class ParkingLot {
 
   public List<ExitPoint> getExitPoints() {
     return exitPoints;
+  }
+
+  public String getDisplayBoard() {
+    return displayBoard;
   }
 }
