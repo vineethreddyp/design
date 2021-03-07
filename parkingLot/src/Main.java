@@ -18,6 +18,7 @@ public class Main {
         ParkingLot parkingLot  = generateParkingLot();
         Vehicle vehicle1 = new Vehicle("TS36F8109");
         Vehicle vehicle2 = new Vehicle("AP2345678");
+
         Procedures.sendAVehicleIntoParkingLot(parkingLot, vehicle1);
         Procedures.sendAVehicleIntoParkingLot(parkingLot, vehicle2 );
         System.out.println("Completed parking Lot");
