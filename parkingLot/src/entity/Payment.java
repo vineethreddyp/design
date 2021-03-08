@@ -11,4 +11,7 @@ public class Payment {
     this.createdAt = LocalDateTime.now();
   }
 
+  public Double getAmount() {
+    return amount;
+  }
 }

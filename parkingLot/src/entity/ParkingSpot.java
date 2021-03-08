@@ -22,4 +22,9 @@ public class ParkingSpot {
   public Vehicle getVehicle() {
     return vehicle;
   }
+
+  public void removeVehicle() {
+    this.isFree = true;
+    this.vehicle = null;
+  }
 }

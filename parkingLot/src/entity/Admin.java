@@ -28,4 +28,8 @@ public class Admin extends User {
   public void addParkingSpot(ParkingFloor parkingFloor, ParkingSpot parkingSpot){
     parkingFloor.getParkingSpotList().add(parkingSpot);
   }
+
+  public void addCustomerPotal(ParkingFloor parkingFloor, CustomerInfoPortal customerInfoPortal) {
+    parkingFloor.getCustomerInfoPortalList().add(customerInfoPortal);
+  }
 }

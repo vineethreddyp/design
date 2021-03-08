@@ -4,6 +4,9 @@ public class EntryPoint {
 
   private String name;
 
+  public EntryPoint(String name){
+    this.name = name;
+  }
   // print ticket func
 
   public ParkingTicket printTicket(Vehicle vehicle){

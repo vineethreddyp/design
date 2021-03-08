@@ -15,4 +15,8 @@ public class Vehicle {
   public String getVehicleNumber() {
     return vehicleNumber;
   }
+
+  public ParkingTicket getParkingTicket() {
+    return parkingTicket;
+  }
 }

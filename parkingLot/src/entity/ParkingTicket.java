@@ -25,4 +25,16 @@ public class ParkingTicket {
   public void setPayment(Payment payment) {
     this.payment = payment;
   }
+
+  public LocalDateTime getInTime() {
+    return inTime;
+  }
+
+  public LocalDateTime getOutTime() {
+    return outTime;
+  }
+
+  public Payment getPayment() {
+    return payment;
+  }
 }
