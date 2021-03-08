@@ -1,5 +1,5 @@
 package enums;
 
-public enum  ParkingSpotType {
+public enum ParkingSpotType {
   Compact, Large, Handicapped, Motorcycle, Electric
 }

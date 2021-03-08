@@ -9,6 +9,7 @@ import entity.ParkingFloor;
 import entity.ParkingLot;
 import entity.ParkingSpot;
 import entity.Vehicle;
+import enums.ParkingSpotType;
 import functions.Procedures;
 import java.util.Arrays;
 import java.util.List;
@@ -17,16 +18,18 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Welcome to ParkingLot!");
         ParkingLot parkingLot  = generateParkingLot();
-        Vehicle vehicle1 = new Vehicle("TS36F8109");
-        Vehicle vehicle2 = new Vehicle("AP2345678");
-        Procedures.sendAVehicleIntoParkingLot(parkingLot, vehicle1);
-        Procedures.sendAVehicleIntoParkingLot(parkingLot, vehicle2 );
-        Procedures.sendAVehicleOutOfParkingLot(parkingLot,vehicle2);
-        Procedures.sendAVehicleOutOfParkingLotUsingCustomerPotal(parkingLot,vehicle1);
+        System.out.println("Parking Lot display board : " + parkingLot.getDisplayBoard().getDisplayMessage());
+        Vehicle compactVehicle = new Vehicle("TS36F9999", ParkingSpotType.Compact);
+        Vehicle motorCycle = new Vehicle("AP23F5678", ParkingSpotType.Motorcycle);
+        Vehicle electricVehicle = new Vehicle("TS12G3456", ParkingSpotType.Electric);
+        Procedures.sendAVehicleIntoParkingLot(parkingLot, compactVehicle);
+        Procedures.sendAVehicleIntoParkingLot(parkingLot, motorCycle);
+        Procedures.sendAVehicleIntoParkingLot(parkingLot, electricVehicle);
+        Procedures.sendAVehicleOutOfParkingLot(parkingLot,motorCycle);
+        Procedures.sendAVehicleOutOfParkingLotUsingCustomerPotal(parkingLot,compactVehicle);
+        Procedures.sendAVehicleOutOfParkingLot(parkingLot, electricVehicle);
         System.out.println("Completed parking Lot program");
     }
-
-
 
     private static ParkingLot generateParkingLot() {
         Admin vineeth = new Admin();

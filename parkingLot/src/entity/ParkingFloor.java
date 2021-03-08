@@ -7,11 +7,13 @@ public class ParkingFloor {
   private String name;
   private List<ParkingSpot> parkingSpotList;
   private List<CustomerInfoPortal> customerInfoPortalList;
+  private DisplayBoard displayBoard;
 
   public ParkingFloor(String name){
     this.name = name;
     this.parkingSpotList = new ArrayList<>();
     this.customerInfoPortalList = new ArrayList<>();
+    this.displayBoard = new DisplayBoard();
   }
 
   public void removeParkingSpot(String name){
@@ -26,12 +28,12 @@ public class ParkingFloor {
     return parkingSpotList;
   }
 
+  public DisplayBoard getDisplayBoard() {
+    return displayBoard;
+  }
+
   public List<CustomerInfoPortal> getCustomerInfoPortalList() {
     return customerInfoPortalList;
   }
 
-  public String displayBoard(){
-    // TODO write function here
-    return "";
-  }
 }

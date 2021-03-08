@@ -1,5 +1,10 @@
 package entity;
 
-public class CompactSpot extends MotorCycleSpot {
+import enums.ParkingSpotType;
 
+public class CompactSpot extends ParkingSpot {
+
+  public CompactSpot(){
+    super(ParkingSpotType.Compact);
+  }
 }
