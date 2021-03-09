@@ -1,7 +1,9 @@
 package entity;
 
 import enums.ParkingSpotType;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -33,10 +35,10 @@ public class DisplayBoard {
 
   public String getDisplayMessage() {
     Set<ParkingSpotType> spotTypeSet = freeParkingSpot.keySet();
-    String displayMessage = "";
+    List<String> displayString = new ArrayList<>();
     for(ParkingSpotType parkingSpotType : spotTypeSet){
-      displayMessage = displayMessage.concat( parkingSpotType + " free spots: " + freeParkingSpot.get(parkingSpotType) + " \n");
+      displayString.add(parkingSpotType + " free spots: " + freeParkingSpot.get(parkingSpotType) );
     }
-    return displayMessage;
+    return String.join("\n", displayString);
   }
 }

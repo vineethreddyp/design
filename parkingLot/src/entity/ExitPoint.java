@@ -20,7 +20,7 @@ public class ExitPoint {
     System.out.println("Cash Payment done for ticket : " + parkingTicket.getTicketNumber());
   }
   public Double scanTicket(ParkingTicket parkingTicket){
-    System.out.println("Scanning ticket at exit point :" + this.name + " Scanned ticket : " + parkingTicket.getTicketNumber());
+    System.out.println("Scanning ticket at exit point :" + this.name + ". Scanned ticket : " + parkingTicket.getTicketNumber());
     Double totalAmount = 100.0;
     parkingTicket.setOutTime(LocalDateTime.now());
     Payment payment = parkingTicket.getPayment();

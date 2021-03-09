@@ -15,6 +15,7 @@ public class Admin extends User {
     for(ParkingSpot parkingSpot : parkingSpotList){
      incrementDisplayBoardSpot(parkingLot.getDisplayBoard(),parkingSpot);
     }
+    System.out.println("New parking floor added : " + parkingFloor.getName());
   }
 
   public void addEntryPoint(ParkingLot parkingLot, EntryPoint entryPoint){

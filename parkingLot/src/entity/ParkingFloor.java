@@ -28,6 +28,14 @@ public class ParkingFloor {
     return parkingSpotList;
   }
 
+
+  public void printDisplayBoard(){
+    System.out.println("<<<<<<<");
+    System.out.println(name + "\n" + displayBoard.getDisplayMessage()) ;
+    System.out.println(">>>>>>>");
+
+  }
+
   public DisplayBoard getDisplayBoard() {
     return displayBoard;
   }

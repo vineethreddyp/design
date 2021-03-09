@@ -26,6 +26,12 @@ public class ParkingLot {
     return displayBoard;
   }
 
+  public void printDisplayBoard(){
+    System.out.println("<<<<<<<");
+    System.out.println(name + "\n" + displayBoard.getDisplayMessage()) ;
+    System.out.println(">>>>>>>");
+  }
+
   public List<ParkingFloor> getParkingFloorList() {
     return parkingFloorList;
   }

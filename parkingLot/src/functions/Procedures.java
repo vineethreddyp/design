@@ -22,6 +22,7 @@ public class Procedures {
   }
 
   public static void sendAVehicleIntoParkingLot(ParkingLot parkingLot, Vehicle vehicle) {
+    parkingLot.printDisplayBoard();
     EntryPoint oneEntryPoint = parkingLot.getEntryPoints().get(0); // assume one entryPoint
     oneEntryPoint.printTicket(vehicle);
     //assign free spot to a vehicle
@@ -31,7 +32,7 @@ public class Procedures {
       ElectricSpot electricSpot = (ElectricSpot) parkedVehicleList.get(vehicle.getVehicleNumber());
       electricSpot.plugCharging(50.0);
     }
-    System.out.println("Parking Lot display board : " + parkingLot.getDisplayBoard().getDisplayMessage());
+    parkingLot.printDisplayBoard();
   }
 
   private static void assignVehicleASpot(ParkingLot parkingLot, Vehicle vehicle) {
@@ -65,7 +66,7 @@ public class Procedures {
     exitPoint.processPayment(vehicle.getParkingTicket(),amountToBePaid);
     updateParkedVehicleMap(parkingLot,vehicle);
     System.out.println("vehicle : " + vehicle.getVehicleNumber() + " moved out of parking lot");
-    System.out.println("Parking Lot display board : " + parkingLot.getDisplayBoard().getDisplayMessage());
+    parkingLot.printDisplayBoard();
     // vehicle exited outside
   }
 
@@ -77,7 +78,6 @@ public class Procedures {
     exitPoint.processPayment(vehicle.getParkingTicket(),amountToBePaid);
     updateParkedVehicleMap(parkingLot,vehicle);
     System.out.println("vehicle : " + vehicle.getVehicleNumber() + " moved out of parking lot");
-    System.out.println("Parking Lot display board : " + parkingLot.getDisplayBoard().getDisplayMessage());
-
+    parkingLot.printDisplayBoard();
   }
 }
