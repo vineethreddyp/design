@@ -71,6 +71,7 @@ public class VendingMachine {
       // this is for abort in the middle
       disperseChange(selectedProduct.getCost()-amountToBePaid);
       clearState();
+      return;
     }
     Coin paidCoin = Coin.findByValue(valueEntered);
     if(Objects.isNull(paidCoin)){
@@ -118,33 +119,39 @@ public class VendingMachine {
         remainingValue = remainingValue - Coin.TwentyFive.getValue();
         temporaryMap.put(Coin.TwentyFive, temporaryMap.get(Coin.TwentyFive) +1);
         isValid = true;
+        continue;
       }
 
       if(remainingValue >= Coin.Ten.getValue() && (coinQuantityMap.get(Coin.Ten) - temporaryMap.get(Coin.Ten)) > 0){
         remainingValue = remainingValue - Coin.Ten.getValue();
         temporaryMap.put(Coin.Ten, temporaryMap.get(Coin.Ten) +1);
         isValid = true;
+        continue;
       }
 
       if(remainingValue >= Coin.Five.getValue() && (coinQuantityMap.get(Coin.Five) - temporaryMap.get(Coin.Five)  )> 0){
         remainingValue = remainingValue - Coin.Five.getValue();
         temporaryMap.put(Coin.Five, temporaryMap.get(Coin.Five) +1);
         isValid = true;
+        continue;
       }
 
       if(remainingValue >= Coin.One.getValue() && (coinQuantityMap.get(Coin.One) - temporaryMap.get(Coin.One)) > 0 ){
         remainingValue = remainingValue - Coin.One.getValue();
         temporaryMap.put(Coin.One, temporaryMap.get(Coin.One) +1);
         isValid = true;
+        continue;
       }
 
     }
+
     if(isValid) {
       printDispersedChange(temporaryMap);
       removeCoinsFromMachine(temporaryMap);
     }
     else {
-      System.out.println("Change dispersion failed. Please select again");
+      System.out.println("Change dispersion failed. Returning paid amount");
+      disperseChange(selectedProduct.getCost()+val); // return original amount
       clearState();
     }
     return isValid;
