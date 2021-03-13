@@ -64,7 +64,7 @@ public class VendingMachineImpl implements VendingMachine {
   @Override
   public void insertCoinForPayment() {
     while (state.equals(State.Process)){
-      displayAmountToBePaid();
+      displayAmountToBePaid(); // In actual implementation displayPanel. display is called
       processAmount();
     }
   }

@@ -31,15 +31,11 @@ public class ProductManagementImpl implements InventoryManagement<Product> {
     productQuantityMap.put(product, productQuantityMap.get(product) -1);
   }
 
-  public Map<Product, Integer> getProductQuantityMap() {
-    return productQuantityMap;
-  }
-
   @Override
   public void displayQuantityOfItems(){
     List<String> productStringList = new ArrayList<>();
     System.out.println("Product list");
-    for(Product product : this.getProductQuantityMap().keySet()){
+    for(Product product : productQuantityMap.keySet()){
       productStringList.add(product.toString() + ": each Rs: " + product.getCost() + " Quantity avaialble: " + productQuantityMap.get(product));
     }
     System.out.println(String.join("\n",productStringList));
