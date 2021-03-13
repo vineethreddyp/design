@@ -1,13 +1,11 @@
-package impl;
+package entity;
 
-import entity.Coin;
-import entity.InventoryManagement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CoinManagementImpl extends InventoryManagement<Coin> {
+public class CoinManagement extends InventoryManagement<Coin> {
 
   @Override
   public void displayQuantityOfItems() {

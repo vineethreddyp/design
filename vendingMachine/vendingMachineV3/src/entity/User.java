@@ -14,6 +14,7 @@ public class User {
   public void selectProduct(){
     vendingMachine.selectProduct();
   }
+
   public void insertCoinForPayment(){
     vendingMachine.insertCoinForPayment();
   }

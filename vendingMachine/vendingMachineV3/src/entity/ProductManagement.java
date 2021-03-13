@@ -1,11 +1,10 @@
-package impl;
+package entity;
 
-import entity.Product;
-import entity.InventoryManagement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductManagementImpl extends InventoryManagement<Product> {
+public class ProductManagement extends InventoryManagement<Product> {
+
   @Override
   public void displayQuantityOfItems(){
     List<String> productStringList = new ArrayList<>();
@@ -15,6 +14,5 @@ public class ProductManagementImpl extends InventoryManagement<Product> {
     }
     System.out.println(String.join("\n",productStringList));
   }
-
 
 }

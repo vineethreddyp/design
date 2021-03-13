@@ -1,29 +1,27 @@
 package impl;
 
 import entity.Coin;
+import entity.CoinManagement;
 import entity.Product;
+import entity.ProductManagement;
 import entity.State;
 import entity.InventoryManagement;
 import interfaces.VendingMachine;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
 
 public class VendingMachineImpl implements VendingMachine {
 
   private String name;
-  private InventoryManagement<Product> productInventoryManagement;
-  private CoinManagementImpl coinInventoryManagement;
+  private ProductManagement productInventoryManagement;
+  private CoinManagement coinInventoryManagement;
   private State state;
   private Integer amountToBePaid;
   private Product selectedProduct;
 
 
-  public VendingMachineImpl(String name, ProductManagementImpl productInventoryManagement,
-       CoinManagementImpl coinInventoryManagement){
+  public VendingMachineImpl(String name, ProductManagement productInventoryManagement,
+       CoinManagement coinInventoryManagement){
     this.name = name;
     this.productInventoryManagement = productInventoryManagement;
     this.coinInventoryManagement = coinInventoryManagement;
@@ -31,19 +29,18 @@ public class VendingMachineImpl implements VendingMachine {
   }
 
   @Override
+  public InventoryManagement<Coin> getCoinInventoryManagement() {
+    return coinInventoryManagement;
+  }
+
+  @Override
   public void addQuantityForAProduct( Product product, Integer quantity){
     productInventoryManagement.addQuantity(product,quantity);
   }
 
-
   @Override
   public void printCoinsInMachine(){
    coinInventoryManagement.displayQuantityOfItems();
-  }
-
-  @Override
-  public void addChangeInsideMachine(Coin coin, Integer quantity) {
-    coinInventoryManagement.addQuantity(coin,quantity);
   }
 
 

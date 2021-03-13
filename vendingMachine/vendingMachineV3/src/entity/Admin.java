@@ -3,7 +3,7 @@ package entity;
 
 import interfaces.AdminVendingMachine;
 
-public class Admin implements AdminVendingMachine{
+public class Admin{
 
   private AdminVendingMachine vendingMachine;
 
@@ -18,19 +18,17 @@ public class Admin implements AdminVendingMachine{
     return vendingMachine;
   }
 
-  @Override
   public void addQuantityForAProduct(Product product, Integer quantity) {
     vendingMachine.addQuantityForAProduct(product,quantity);
   }
 
-  @Override
   public void printCoinsInMachine() {
     vendingMachine.printCoinsInMachine();
   }
 
-  @Override
   public void addChangeInsideMachine(Coin coin, Integer quantity) {
-    vendingMachine.addChangeInsideMachine(coin,quantity);
+    vendingMachine.getCoinInventoryManagement().addQuantity(coin,quantity);
   }
+
 
 }
