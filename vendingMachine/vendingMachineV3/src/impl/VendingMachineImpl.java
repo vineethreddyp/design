@@ -1,11 +1,10 @@
 package impl;
 
 import entity.Coin;
-import entity.CoinManagement;
 import entity.Product;
-import entity.ProductManagement;
 import entity.State;
-import entity.InventoryManagement;
+import interfaces.CoinManagement;
+import interfaces.ProductManagment;
 import interfaces.VendingMachine;
 import java.util.Objects;
 import java.util.Scanner;
@@ -13,14 +12,14 @@ import java.util.Scanner;
 public class VendingMachineImpl implements VendingMachine {
 
   private String name;
-  private ProductManagement productInventoryManagement;
+  private ProductManagment productInventoryManagement;
   private CoinManagement coinInventoryManagement;
   private State state;
   private Integer amountToBePaid;
   private Product selectedProduct;
 
 
-  public VendingMachineImpl(String name, ProductManagement productInventoryManagement,
+  public VendingMachineImpl(String name, ProductManagment productInventoryManagement,
        CoinManagement coinInventoryManagement){
     this.name = name;
     this.productInventoryManagement = productInventoryManagement;
@@ -29,7 +28,7 @@ public class VendingMachineImpl implements VendingMachine {
   }
 
   @Override
-  public InventoryManagement<Coin> getCoinInventoryManagement() {
+  public CoinManagement getCoinInventoryManagement() {
     return coinInventoryManagement;
   }
 

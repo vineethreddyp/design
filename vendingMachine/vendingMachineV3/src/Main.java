@@ -3,8 +3,8 @@ import entity.Coin;
 import entity.DisplayPanel;
 import entity.Product;
 import entity.User;
-import entity.CoinManagement;
-import entity.ProductManagement;
+import impl.CoinManagementImpl;
+import impl.ProductManagementImpl;
 import impl.VendingMachineImpl;
 
 public class Main {
@@ -26,8 +26,8 @@ public class Main {
 
 
     private static VendingMachineImpl generateVendingMachine() {
-        ProductManagement productManagement = new ProductManagement();
-        CoinManagement coinInventoryManagement = new CoinManagement();
+        ProductManagementImpl productManagement = new ProductManagementImpl();
+        CoinManagementImpl coinInventoryManagement = new CoinManagementImpl();
         VendingMachineImpl vendingMachine = new VendingMachineImpl("Vineeth's vending machine",productManagement, coinInventoryManagement);
         Admin vineeth = new Admin(vendingMachine,"vineeth");
         vineeth.addQuantityForAProduct(Product.Coke, 10);
