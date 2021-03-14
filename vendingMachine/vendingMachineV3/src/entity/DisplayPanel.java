@@ -1,13 +1,13 @@
 package entity;
 
 import interfaces.DisplayPanelInterface;
-import interfaces.UserVendingMachine;
+import interfaces.VendingMachine;
 
 public class DisplayPanel implements DisplayPanelInterface {
 
-  private UserVendingMachine vendingMachine;
+  private VendingMachine vendingMachine;
 
-  public DisplayPanel(UserVendingMachine vendingMachine) {
+  public DisplayPanel(VendingMachine vendingMachine) {
     this.vendingMachine = vendingMachine;
   }
 

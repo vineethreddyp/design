@@ -1,6 +1,6 @@
 package interfaces;
 
-public interface UserVendingMachine {
+public interface UserFunction {
   void insertCoinForPayment();
   void selectProduct();
   void display();

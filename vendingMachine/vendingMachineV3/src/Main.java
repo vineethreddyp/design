@@ -1,19 +1,32 @@
-import entity.Admin;
+import impl.AdminImpl;
 import entity.Coin;
 import entity.DisplayPanel;
 import entity.Product;
-import entity.User;
+import impl.UserImpl;
 import impl.CoinManagementImpl;
 import impl.ProductManagementImpl;
 import impl.VendingMachineImpl;
+import interfaces.AdminFunction;
+import interfaces.CoinManagement;
+import interfaces.ProductManagment;
 
 public class Main {
 
     public static void main(String[] args) {
         System.out.println("Vending Machine Up!");
-        VendingMachineImpl vendingMachine = generateVendingMachine();
-        Admin vineethAdmin = new Admin(vendingMachine,"temporary admin");
-        User customer = new User(vendingMachine);
+
+        ProductManagment productManagement = new ProductManagementImpl();
+        CoinManagement coinInventoryManagement = new CoinManagementImpl();
+        AdminFunction vineethAdmin = new AdminImpl("vineeth",productManagement, coinInventoryManagement);
+        VendingMachineImpl vendingMachine = new VendingMachineImpl("Vineeth's vending machine",productManagement, coinInventoryManagement);
+        vineethAdmin.addQuantityForAProduct(Product.Coke, 10);
+        vineethAdmin.addQuantityForAProduct(Product.Soda, 20);
+        vineethAdmin.addQuantityForAProduct(Product.Pepsi, 10);
+        vineethAdmin.addChangeInsideMachine(Coin.TwentyFive, 2);
+        vineethAdmin.addChangeInsideMachine(Coin.Five, 1);
+        vineethAdmin.addChangeInsideMachine(Coin.One, 1);
+        vineethAdmin.addChangeInsideMachine(Coin.Ten, 2);
+        UserImpl customer = new UserImpl(vendingMachine);
         DisplayPanel displayPanel = new DisplayPanel(vendingMachine);
 
         while (true){
@@ -25,18 +38,4 @@ public class Main {
     }
 
 
-    private static VendingMachineImpl generateVendingMachine() {
-        ProductManagementImpl productManagement = new ProductManagementImpl();
-        CoinManagementImpl coinInventoryManagement = new CoinManagementImpl();
-        VendingMachineImpl vendingMachine = new VendingMachineImpl("Vineeth's vending machine",productManagement, coinInventoryManagement);
-        Admin vineeth = new Admin(vendingMachine,"vineeth");
-        vineeth.addQuantityForAProduct(Product.Coke, 10);
-        vineeth.addQuantityForAProduct(Product.Soda, 20);
-        vineeth.addQuantityForAProduct(Product.Pepsi, 10);
-        vineeth.addChangeInsideMachine(Coin.TwentyFive, 2);
-        vineeth.addChangeInsideMachine(Coin.Five, 1);
-        vineeth.addChangeInsideMachine(Coin.One, 1);
-        vineeth.addChangeInsideMachine(Coin.Ten, 2);
-        return vendingMachine;
-    }
 }

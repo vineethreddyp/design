@@ -27,21 +27,6 @@ public class VendingMachineImpl implements VendingMachine {
     state = State.Idle;
   }
 
-  @Override
-  public CoinManagement getCoinInventoryManagement() {
-    return coinInventoryManagement;
-  }
-
-  @Override
-  public void addQuantityForAProduct( Product product, Integer quantity){
-    productInventoryManagement.addQuantity(product,quantity);
-  }
-
-  @Override
-  public void printCoinsInMachine(){
-   coinInventoryManagement.displayQuantityOfItems();
-  }
-
 
   public String getName() {
     return name;

@@ -34,9 +34,4 @@ public class ProductManagementImpl implements ProductManagment {
     productInventoryManagement.decrementAQuantity(product);
   }
 
-  @Override
-  public void getQuantityMap() {
-
-  }
-
 }
