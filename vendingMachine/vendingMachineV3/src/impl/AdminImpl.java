@@ -3,11 +3,11 @@ package impl;
 
 import entity.Coin;
 import entity.Product;
-import interfaces.AdminFunction;
+import interfaces.Admin;
 import interfaces.CoinManagement;
 import interfaces.ProductManagment;
 
-public class AdminImpl implements AdminFunction {
+public class AdminImpl implements Admin {
 
   private ProductManagment productManagment;
   private CoinManagement coinManagement;

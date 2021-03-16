@@ -1,7 +1,6 @@
 package interfaces;
 
-public interface UserFunction {
+public interface User {
   void insertCoinForPayment();
   void selectProduct();
-  void display();
 }

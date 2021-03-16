@@ -1,13 +1,14 @@
 import impl.AdminImpl;
 import entity.Coin;
-import entity.DisplayPanel;
+import impl.DisplayPanelImpl;
 import entity.Product;
 import impl.UserImpl;
 import impl.CoinManagementImpl;
 import impl.ProductManagementImpl;
 import impl.VendingMachineImpl;
-import interfaces.AdminFunction;
+import interfaces.Admin;
 import interfaces.CoinManagement;
+import interfaces.DisplayPanel;
 import interfaces.ProductManagment;
 
 public class Main {
@@ -17,8 +18,9 @@ public class Main {
 
         ProductManagment productManagement = new ProductManagementImpl();
         CoinManagement coinInventoryManagement = new CoinManagementImpl();
-        AdminFunction vineethAdmin = new AdminImpl("vineeth",productManagement, coinInventoryManagement);
-        VendingMachineImpl vendingMachine = new VendingMachineImpl("Vineeth's vending machine",productManagement, coinInventoryManagement);
+        DisplayPanel displayPanel = new DisplayPanelImpl();
+        Admin vineethAdmin = new AdminImpl("vineeth",productManagement, coinInventoryManagement);
+        VendingMachineImpl vendingMachine = new VendingMachineImpl("Vineeth's vending machine",productManagement, coinInventoryManagement, displayPanel);
         vineethAdmin.addQuantityForAProduct(Product.Coke, 10);
         vineethAdmin.addQuantityForAProduct(Product.Soda, 20);
         vineethAdmin.addQuantityForAProduct(Product.Pepsi, 10);
@@ -27,11 +29,9 @@ public class Main {
         vineethAdmin.addChangeInsideMachine(Coin.One, 1);
         vineethAdmin.addChangeInsideMachine(Coin.Ten, 2);
         UserImpl customer = new UserImpl(vendingMachine);
-        DisplayPanel displayPanel = new DisplayPanel(vendingMachine);
-
+        vendingMachine.startMachine();
         while (true){
             vineethAdmin.printCoinsInMachine(); // this line for debug purpose only. this can be commented
-            displayPanel.display();
             customer.selectProduct();
             customer.insertCoinForPayment();
         }

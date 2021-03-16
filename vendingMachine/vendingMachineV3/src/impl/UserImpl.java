@@ -1,10 +1,10 @@
 package impl;
 
 
-import interfaces.UserFunction;
+import interfaces.User;
 import interfaces.VendingMachine;
 
-public class UserImpl implements UserFunction {
+public class UserImpl implements User {
 
   private VendingMachine vendingMachine;
 
@@ -15,11 +15,6 @@ public class UserImpl implements UserFunction {
   @Override
   public void selectProduct(){
     vendingMachine.selectProduct();
-  }
-
-  @Override
-  public void display() {
-    vendingMachine.display();
   }
 
   @Override

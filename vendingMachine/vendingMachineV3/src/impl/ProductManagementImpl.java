@@ -15,13 +15,13 @@ public class ProductManagementImpl implements ProductManagment {
   }
 
   @Override
-  public void displayQuantityOfItems(){
+  public String displayQuantityOfItems(){
     List<String> productStringList = new ArrayList<>();
     System.out.println("Product list");
     for(Product product : productInventoryManagement.getItemQuantityMap().keySet()){
       productStringList.add(product.toString() + ": each Rs: " + product.getCost() + " Quantity avaialble: " + productInventoryManagement.getItemQuantityMap().get(product));
     }
-    System.out.println(String.join("\n",productStringList));
+    return String.join("\n",productStringList);
   }
 
   @Override

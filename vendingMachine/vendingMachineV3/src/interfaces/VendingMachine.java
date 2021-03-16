@@ -1,4 +1,7 @@
 package interfaces;
 
-public interface VendingMachine extends UserFunction {
+public interface VendingMachine {
+  void insertCoinForPayment();
+  void startMachine();
+  void selectProduct();
 }

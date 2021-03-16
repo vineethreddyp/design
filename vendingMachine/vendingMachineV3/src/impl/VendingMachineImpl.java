@@ -4,6 +4,7 @@ import entity.Coin;
 import entity.Product;
 import entity.State;
 import interfaces.CoinManagement;
+import interfaces.DisplayPanel;
 import interfaces.ProductManagment;
 import interfaces.VendingMachine;
 import java.util.Objects;
@@ -14,17 +15,19 @@ public class VendingMachineImpl implements VendingMachine {
   private String name;
   private ProductManagment productInventoryManagement;
   private CoinManagement coinInventoryManagement;
+  private DisplayPanel displayPanel;
   private State state;
   private Integer amountToBePaid;
   private Product selectedProduct;
 
 
   public VendingMachineImpl(String name, ProductManagment productInventoryManagement,
-       CoinManagement coinInventoryManagement){
+       CoinManagement coinInventoryManagement, DisplayPanel displayPanel){
     this.name = name;
     this.productInventoryManagement = productInventoryManagement;
     this.coinInventoryManagement = coinInventoryManagement;
     state = State.Idle;
+    this.displayPanel = displayPanel;
   }
 
 
@@ -35,20 +38,20 @@ public class VendingMachineImpl implements VendingMachine {
   @Override
   public void insertCoinForPayment() {
     while (state.equals(State.Process)){
-      displayAmountToBePaid(); // In actual implementation displayPanel. display is called
+      displayPanel.setDisplayString(displayAmountToBePaid()); // In actual implementation displayPanel. display is called
       processAmount();
     }
   }
 
 
   @Override
-  public void display(){
+  public void startMachine(){
     switch (state){
       case Idle:
-        productInventoryManagement.displayQuantityOfItems();
+        displayPanel.setDisplayString(productInventoryManagement.displayQuantityOfItems());
         break;
       case Process:
-        displayAmountToBePaid();
+        displayPanel.setDisplayString(displayAmountToBePaid());
     }
   }
 
@@ -59,7 +62,7 @@ public class VendingMachineImpl implements VendingMachine {
     String productString =  sc.next();
     Product product = Product.findByName(productString);
     if(Objects.isNull(product)){
-      System.out.println("Invalid Product name. Valid are " + Product.getValidProdcutList());
+      displayPanel.setDisplayString("Invalid Product name. Valid are " + Product.getValidProdcutList());
       return;
     }
     this.selectedProduct  = product;
@@ -69,12 +72,12 @@ public class VendingMachineImpl implements VendingMachine {
 
 
 
-  private void displayAmountToBePaid(){
-    System.out.println("Amount to be paid : "  + amountToBePaid);
+  private String displayAmountToBePaid(){
+    return "Amount to be paid : "  + amountToBePaid;
   }
 
   private void processAmount() {
-    System.out.println("Enter amount for payment");
+    displayPanel.setDisplayString("Enter amount for payment");
     Scanner sc= new Scanner(System.in);
     Integer valueEntered = sc.nextInt();
     if(valueEntered == -1){
@@ -85,7 +88,7 @@ public class VendingMachineImpl implements VendingMachine {
     }
     Coin paidCoin = Coin.findByValue(valueEntered);
     if(Objects.isNull(paidCoin)){
-      System.out.println("Not accepted coin. Valid are " + Coin.getValidCoins());
+      displayPanel.setDisplayString("Not accepted coin. Valid are " + Coin.getValidCoins());
       return;
     }
     Integer finalVal = amountToBePaid - paidCoin.getValue();
@@ -109,14 +112,14 @@ public class VendingMachineImpl implements VendingMachine {
     else {
       // change dispersion failed
       // total amount paid has to be returned
-      System.out.println("Change dispersion failed. Product not dispersed. Dispersing paid amount");
+      displayPanel.setDisplayString("Change dispersion failed. Product not dispersed. Dispersing paid amount");
       coinInventoryManagement.disperseChange(finalVal + selectedProduct.getCost());
       clearState();
     }
   }
 
   private void disperseProduct() {
-    System.out.println("Product : " +  this.selectedProduct.getName() +  " Dispersed");
+    displayPanel.setDisplayString("Product : " +  this.selectedProduct.getName() +  " Dispersed");
     productInventoryManagement.decrementAQuantity(this.selectedProduct);
     clearState();
 
