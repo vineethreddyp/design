@@ -1,7 +1,4 @@
 package interfaces;
 
-public interface VendingMachine {
-  void insertCoinForPayment();
-  void startMachine();
-  void selectProduct();
+public interface VendingMachine extends AdminVendingMachine, UserVendingMachine {
 }

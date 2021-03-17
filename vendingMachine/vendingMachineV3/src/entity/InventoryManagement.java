@@ -3,13 +3,15 @@ package entity;
 import java.util.HashMap;
 import java.util.Map;
 
-public class InventoryManagement<T> {
+public abstract class InventoryManagement<T> {
 
   private Map<T, Integer> itemQuantityMap;
 
   public InventoryManagement() {
     this.itemQuantityMap = new HashMap<>();
   }
+
+  public abstract void displayQuantityOfItems();
 
   public void addQuantity( T item, Integer quantity){
     if(itemQuantityMap.containsKey(item)){
@@ -25,8 +27,7 @@ public class InventoryManagement<T> {
       itemQuantityMap.put(item, itemQuantityMap.get(item) -1);
   }
 
-  public Map<T, Integer> getItemQuantityMap() {
+  protected Map<T, Integer> getItemQuantityMap() {
     return itemQuantityMap;
   }
-
 }
