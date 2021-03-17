@@ -10,6 +10,7 @@ import interfaces.Admin;
 import interfaces.CoinManagement;
 import interfaces.DisplayPanel;
 import interfaces.ProductManagment;
+import interfaces.User;
 
 public class Main {
 
@@ -28,7 +29,7 @@ public class Main {
         vineethAdmin.addChangeInsideMachine(Coin.Five, 1);
         vineethAdmin.addChangeInsideMachine(Coin.One, 1);
         vineethAdmin.addChangeInsideMachine(Coin.Ten, 2);
-        UserImpl customer = new UserImpl(vendingMachine);
+        User customer = new UserImpl(vendingMachine);
         vendingMachine.startMachine();
         while (true){
             vineethAdmin.printCoinsInMachine(); // this line for debug purpose only. this can be commented
