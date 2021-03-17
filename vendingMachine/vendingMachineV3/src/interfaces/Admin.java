@@ -1,11 +1,11 @@
 package interfaces;
 
+
 import entity.Coin;
-import entity.InventoryManagement;
 import entity.Product;
 
-public interface AdminVendingMachine {
+public interface Admin {
   void addQuantityForAProduct(Product product, Integer quantity);
   void printCoinsInMachine();
-  InventoryManagement<Coin> getCoinInventoryManagement();
+  void addChangeInsideMachine(Coin coin, Integer quantity);
 }
