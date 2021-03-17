@@ -1,3 +1,5 @@
+package src;
+
 import impl.AdminImpl;
 import entity.Coin;
 import impl.DisplayPanelImpl;
