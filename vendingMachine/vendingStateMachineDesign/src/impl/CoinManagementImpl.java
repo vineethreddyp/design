@@ -18,7 +18,7 @@ public class CoinManagementImpl implements CoinManagement {
 
   @Override
   public void displayQuantityOfItems() {
-    Map<Coin,Integer> coinIntegerMap = coinInventoryManagement.getItemQuantityMap();
+    Map<Coin, Integer> coinIntegerMap = coinInventoryManagement.getItemQuantityMap();
     List<String> coinStringList = new ArrayList<>();
     for(Coin coin : coinIntegerMap.keySet()){
       coinStringList.add(coinIntegerMap.get(coin) + " " + coin.toString() + "coins");
@@ -40,28 +40,32 @@ public class CoinManagementImpl implements CoinManagement {
     while(remainingValue > 0 && isValid){
       isValid = false;
 
-      if(remainingValue >= Coin.TwentyFive.getValue() && (coinInventoryManagement.getItemQuantityMap().get(Coin.TwentyFive) - temporaryMap.get(Coin.TwentyFive)) > 0){
+      if(remainingValue >= Coin.TwentyFive.getValue() && (coinInventoryManagement.getItemQuantityMap().get(
+          Coin.TwentyFive) - temporaryMap.get(Coin.TwentyFive)) > 0){
         remainingValue = remainingValue - Coin.TwentyFive.getValue();
         temporaryMap.put(Coin.TwentyFive, temporaryMap.get(Coin.TwentyFive) +1);
         isValid = true;
         continue;
       }
 
-      if(remainingValue >= Coin.Ten.getValue() && (coinInventoryManagement.getItemQuantityMap().get(Coin.Ten) - temporaryMap.get(Coin.Ten)) > 0){
+      if(remainingValue >= Coin.Ten.getValue() && (coinInventoryManagement.getItemQuantityMap().get(
+          Coin.Ten) - temporaryMap.get(Coin.Ten)) > 0){
         remainingValue = remainingValue - Coin.Ten.getValue();
         temporaryMap.put(Coin.Ten, temporaryMap.get(Coin.Ten) +1);
         isValid = true;
         continue;
       }
 
-      if(remainingValue >= Coin.Five.getValue() && (coinInventoryManagement.getItemQuantityMap().get(Coin.Five) - temporaryMap.get(Coin.Five)  )> 0){
+      if(remainingValue >= Coin.Five.getValue() && (coinInventoryManagement.getItemQuantityMap().get(
+          Coin.Five) - temporaryMap.get(Coin.Five)  )> 0){
         remainingValue = remainingValue - Coin.Five.getValue();
         temporaryMap.put(Coin.Five, temporaryMap.get(Coin.Five) +1);
         isValid = true;
         continue;
       }
 
-      if(remainingValue >= Coin.One.getValue() && (coinInventoryManagement.getItemQuantityMap().get(Coin.One) - temporaryMap.get(Coin.One)) > 0 ){
+      if(remainingValue >= Coin.One.getValue() && (coinInventoryManagement.getItemQuantityMap().get(
+          Coin.One) - temporaryMap.get(Coin.One)) > 0 ){
         remainingValue = remainingValue - Coin.One.getValue();
         temporaryMap.put(Coin.One, temporaryMap.get(Coin.One) +1);
         isValid = true;

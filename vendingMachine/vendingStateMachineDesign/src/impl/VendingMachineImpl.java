@@ -2,10 +2,10 @@ package impl;
 
 import entity.Coin;
 import entity.Product;
-import entity.State;
 import interfaces.CoinManagement;
 import interfaces.DisplayPanel;
 import interfaces.ProductManagment;
+import interfaces.State;
 import interfaces.VendingMachine;
 import java.util.Objects;
 import java.util.Scanner;
@@ -16,18 +16,23 @@ public class VendingMachineImpl implements VendingMachine {
   private ProductManagment productInventoryManagement;
   private CoinManagement coinInventoryManagement;
   private DisplayPanel displayPanel;
-  private State state;
   private Integer amountToBePaid;
   private Product selectedProduct;
+  private State vendingMachineState;
+  private State idleState;
+  private State processState;
+
 
 
   public VendingMachineImpl(String name, ProductManagment productInventoryManagement,
-       CoinManagement coinInventoryManagement, DisplayPanel displayPanel){
+       CoinManagement coinInventoryManagement, DisplayPanel displayPanel, State idleState, State processState){
     this.name = name;
     this.productInventoryManagement = productInventoryManagement;
     this.coinInventoryManagement = coinInventoryManagement;
-    state = State.Idle;
     this.displayPanel = displayPanel;
+    this.vendingMachineState = idleState;
+    this.idleState = idleState;
+    this.processState = processState;
   }
 
 
@@ -35,29 +40,15 @@ public class VendingMachineImpl implements VendingMachine {
     return name;
   }
 
-  @Override
-  public void insertCoinForPayment() {
-    while (state.equals(State.Process)){
-      displayPanel.setDisplayString(displayAmountToBePaid()); // In actual implementation displayPanel. display is called
-      processAmount();
-    }
-  }
 
-
-  @Override
-  public void startMachine(){
-    switch (state){
-      case Idle:
-        displayPanel.setDisplayString(productInventoryManagement.displayQuantityOfItems());
-        break;
-      case Process:
-        displayPanel.setDisplayString(displayAmountToBePaid());
-    }
+  private Integer insertCoinForPayment() {
+    Scanner sc= new Scanner(System.in);
+     return sc.nextInt();
   }
 
   @Override
   public void selectProduct() {
-    System.out.println("Select product");
+    displayPanel.setDisplayString("Select product");
     Scanner sc= new Scanner(System.in);
     String productString =  sc.next();
     Product product = Product.findByName(productString);
@@ -67,42 +58,58 @@ public class VendingMachineImpl implements VendingMachine {
     }
     this.selectedProduct  = product;
     this.amountToBePaid = product.getCost();
-    this.state = State.Process;
+    this.vendingMachineState = processState;
+    displayAmountToBePaid();
+
+  }
+
+  @Override
+  public void setDisplay() {
+    displayPanel.setDisplayString(productInventoryManagement.displayQuantityOfItems());
   }
 
 
-
-  private String displayAmountToBePaid(){
-    return "Amount to be paid : "  + amountToBePaid;
+  private void  displayAmountToBePaid(){
+    displayPanel.setDisplayString("Amount to be paid : "  + amountToBePaid +  "\nEnter amount for payment");
   }
 
-  private void processAmount() {
-    displayPanel.setDisplayString("Enter amount for payment");
-    Scanner sc= new Scanner(System.in);
-    Integer valueEntered = sc.nextInt();
-    if(valueEntered == -1){
-      // this is for abort in the middle
-      coinInventoryManagement.disperseChange(selectedProduct.getCost()-amountToBePaid);
-      clearState();
-      return;
-    }
-    Coin paidCoin = Coin.findByValue(valueEntered);
-    if(Objects.isNull(paidCoin)){
-      displayPanel.setDisplayString("Not accepted coin. Valid are " + Coin.getValidCoins());
-      return;
-    }
-    Integer finalVal = amountToBePaid - paidCoin.getValue();
-    coinInventoryManagement.addQuantity(paidCoin,1);
-    if(finalVal == 0){
-      amountToBePaid = 0;
-      disperseProduct();
-    }
-    else if(finalVal > 0){
-      amountToBePaid = finalVal;
-    }
-    else {
-      disperseChange(finalVal * -1);
-    }
+  @Override
+  public void processAmount() {
+
+      Integer valueEntered = insertCoinForPayment();
+      if(valueEntered == -1){
+        // this is for abort in the middle
+        coinInventoryManagement.disperseChange(selectedProduct.getCost()-amountToBePaid);
+        clearState();
+        return;
+      }
+      Coin paidCoin = Coin.findByValue(valueEntered);
+      if(Objects.isNull(paidCoin)){
+        displayPanel.setDisplayString("Not accepted coin. Valid are " + Coin.getValidCoins());
+        return;
+      }
+      Integer finalVal = amountToBePaid - paidCoin.getValue();
+      coinInventoryManagement.addQuantity(paidCoin,1);
+      if(finalVal == 0){
+        amountToBePaid = 0;
+        disperseProduct();
+
+      }
+      else if(finalVal > 0){
+        amountToBePaid = finalVal;
+        displayAmountToBePaid();
+
+      }
+      else {
+        disperseChange(finalVal * -1);
+      }
+
+
+  }
+
+  @Override
+  public void handle() {
+    vendingMachineState.handle(this);
   }
 
   private void disperseChange(Integer finalVal) {
@@ -126,7 +133,7 @@ public class VendingMachineImpl implements VendingMachine {
   }
 
   private void clearState() {
-    this.state = State.Idle;
+    this.vendingMachineState = idleState;
     this.amountToBePaid = 0;
     this.selectedProduct = null;
   }
