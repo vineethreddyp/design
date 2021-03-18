@@ -17,8 +17,8 @@ public class UserImpl implements User {
     vendingMachine.selectProduct();
   }
 
-  @Override
-  public void insertCoinForPayment(){
-    vendingMachine.insertCoinForPayment();
-  }
+//  @Override
+//  public void insertCoinForPayment(){
+//    vendingMachine.insertCoinForPayment();
+//  }
 }

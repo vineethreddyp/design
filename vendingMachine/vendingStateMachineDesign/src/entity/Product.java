@@ -11,7 +11,7 @@ public enum Product {
   private String name;
   private Integer cost;
 
-  private static Map<String,Product> productMap;
+  private static Map<String, Product> productMap;
   private static String validProductList;
 
   static {

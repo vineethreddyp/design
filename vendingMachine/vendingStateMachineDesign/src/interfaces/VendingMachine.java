@@ -1,7 +1,8 @@
 package interfaces;
 
 public interface VendingMachine {
-  void insertCoinForPayment();
-  void startMachine();
   void selectProduct();
+  void setDisplay();
+  void processAmount();
+  void handle();
 }

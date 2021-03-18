@@ -1,6 +1,6 @@
 package interfaces;
 
 public interface User {
-  void insertCoinForPayment();
+//  void insertCoinForPayment();
   void selectProduct();
 }
