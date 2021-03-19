@@ -21,7 +21,7 @@ public class VendingMachineImpl implements VendingMachine {
   private State vendingMachineState;
   private State idleState;
   private State processState;
-
+  private Integer valueInserted;
 
 
   public VendingMachineImpl(String name, ProductManagment productInventoryManagement,
@@ -41,21 +41,20 @@ public class VendingMachineImpl implements VendingMachine {
   }
 
 
-  private Integer insertCoinForPayment() {
-    Scanner sc= new Scanner(System.in);
-     return sc.nextInt();
+  public void insertCoinForPayment(Integer integer) {
+    this.valueInserted = integer;
   }
 
   @Override
-  public void selectProduct() {
-    displayPanel.setDisplayString("Select product");
-    Scanner sc= new Scanner(System.in);
-    String productString =  sc.next();
-    Product product = Product.findByName(productString);
-    if(Objects.isNull(product)){
-      displayPanel.setDisplayString("Invalid Product name. Valid are " + Product.getValidProdcutList());
-      return;
-    }
+  public void selectProduct(Product product) {
+//    displayPanel.setDisplayString("Select product");
+//    Scanner sc= new Scanner(System.in);
+//    String productString =  sc.next();
+//    Product product = Product.findByName(productString);
+//    if(Objects.isNull(product)){
+//      displayPanel.setDisplayString("Invalid Product name. Valid are " + Product.getValidProdcutList());
+//      return;
+//    }
     this.selectedProduct  = product;
     this.amountToBePaid = product.getCost();
     this.vendingMachineState = processState;
@@ -70,13 +69,13 @@ public class VendingMachineImpl implements VendingMachine {
 
 
   private void  displayAmountToBePaid(){
-    displayPanel.setDisplayString("Amount to be paid : "  + amountToBePaid +  "\nEnter amount for payment");
+    displayPanel.setDisplayString("Amount to be paid : "  + amountToBePaid);
   }
 
   @Override
   public void processAmount() {
 
-      Integer valueEntered = insertCoinForPayment();
+      Integer valueEntered = valueInserted;
       if(valueEntered == -1){
         // this is for abort in the middle
         coinInventoryManagement.disperseChange(selectedProduct.getCost()-amountToBePaid);
@@ -92,6 +91,7 @@ public class VendingMachineImpl implements VendingMachine {
       coinInventoryManagement.addQuantity(paidCoin,1);
       if(finalVal == 0){
         amountToBePaid = 0;
+
         disperseProduct();
 
       }

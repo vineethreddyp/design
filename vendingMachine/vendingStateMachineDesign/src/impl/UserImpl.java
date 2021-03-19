@@ -1,6 +1,7 @@
 package impl;
 
 
+import entity.Product;
 import interfaces.User;
 import interfaces.VendingMachine;
 
@@ -13,12 +14,12 @@ public class UserImpl implements User {
   }
 
   @Override
-  public void selectProduct(){
-    vendingMachine.selectProduct();
+  public void selectProduct(Product product){
+    vendingMachine.selectProduct(product);
   }
 
-//  @Override
-//  public void insertCoinForPayment(){
-//    vendingMachine.insertCoinForPayment();
-//  }
+  @Override
+  public void insertCoinForPayment(Integer integer){
+    vendingMachine.insertCoinForPayment(integer);
+  }
 }
