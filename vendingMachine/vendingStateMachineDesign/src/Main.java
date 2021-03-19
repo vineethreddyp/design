@@ -36,14 +36,48 @@ public class Main {
         State vendingMachineProcessState = new VendingMachineProcess();
         VendingMachine vendingMachine = new VendingMachineImpl("Vineeth's vending machine",productManagement, coinInventoryManagement,
             displayPanel, vendingMachineIdleState, vendingMachineProcessState);
-
-
         User customer = new UserImpl(vendingMachine);
+        testHappyFlow(vendingMachine, customer);
+        testChangeDisperseFlow(vendingMachine, customer);
+        testAbortFlow(vendingMachine,customer);
+
+    }
+
+    private static void testChangeDisperseFlow(VendingMachine vendingMachine, User customer) {
+        System.out.println("\nStarted: Change Disperse");
+        vendingMachine.handle();
+        customer.selectProduct(Product.Pepsi);//  select pepsi cost 35
+        customer.insertCoinForPayment(25);
+        vendingMachine.handle();
+        customer.insertCoinForPayment(25);
+        vendingMachine.handle();
+        System.out.println("Completed: Change Disperse\n");
+    }
 
 
-        while (true){
-            vineethAdmin.printCoinsInMachine(); // this line for debug purpose only. this can be commented
-            vendingMachine.handle();
-        }
+    private static void testAbortFlow(VendingMachine vendingMachine, User customer) {
+        System.out.println("\nStarted: Abort Flow");
+        vendingMachine.handle();
+        vendingMachine.handle();
+        customer.selectProduct(Product.Coke);//  select soda
+        customer.insertCoinForPayment(10);
+        vendingMachine.handle();
+        customer.insertCoinForPayment(-1);
+        vendingMachine.handle();
+        System.out.println("Completed: Abort Flow\n");
+
+    }
+
+    private static void testHappyFlow(VendingMachine vendingMachine, User customer) {
+        System.out.println("\nStarted: Happy Flow");
+        vendingMachine.handle();
+        customer.selectProduct(Product.Soda);//  select soda
+        customer.insertCoinForPayment(25);
+        vendingMachine.handle();
+        customer.insertCoinForPayment(10);
+        vendingMachine.handle();
+        customer.insertCoinForPayment(10);
+        vendingMachine.handle();
+        System.out.println("Completed: Happy Flow\n");
     }
 }

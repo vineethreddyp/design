@@ -8,6 +8,5 @@ public class VendingMachineIdle implements State {
   @Override
   public void handle(VendingMachine vendingMachine) {
     vendingMachine.setDisplay();
-    vendingMachine.selectProduct();
   }
 }
