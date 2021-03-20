@@ -7,5 +7,5 @@ You need to design a Vending Machine which
 
 Source: https://javarevisited.blogspot.com/2016/06/design-vending-machine-in-java.html#ixzz6ofwQplpZ
 
-State Diagram:
+My State Diagram:
 ![alt text](https://github.com/vineethreddyp/design/blob/main/vendingMachine/vendingStateMachineFinal/vending%20machine%20state%20diagram.png?raw=true)
