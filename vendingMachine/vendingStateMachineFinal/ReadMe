@@ -6,3 +6,6 @@ You need to design a Vending Machine which
 4.  Return selected product and remaining change if any
 
 Source: https://javarevisited.blogspot.com/2016/06/design-vending-machine-in-java.html#ixzz6ofwQplpZ
+
+State Diagram:
+![alt text](https://github.com/vineethreddyp/design/blob/main/vendingMachine/vendingStateMachineFinal/vending%20machine%20state%20diagram.png?raw=true)
