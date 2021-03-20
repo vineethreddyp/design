@@ -7,14 +7,19 @@ import interfaces.VendingMachine;
 
 public class UserImpl implements User {
 
+  private VendingMachine vendingMachine;
+
+  public UserImpl(VendingMachine vendingMachine ){
+    this.vendingMachine = vendingMachine;
+  }
 
   @Override
-  public void selectProduct(VendingMachine vendingMachine, Product product){
+  public void selectProduct( Product product){
     vendingMachine.selectProduct(product);
   }
 
   @Override
-  public void insertCoinForPayment(VendingMachine vendingMachine, Integer integer){
+  public void insertCoinForPayment(Integer integer){
     vendingMachine.insertCoinForPayment(integer);
   }
 }

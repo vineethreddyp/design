@@ -7,7 +7,7 @@ public class DisplayPanelImpl implements DisplayPanel {
   private String displayString;
 
   public void setDisplayString(String displayString) {
-//    System.out.println(displayString);
+    System.out.println(displayString);
     this.displayString = displayString;
   }
 

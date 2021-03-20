@@ -8,4 +8,6 @@ public interface Admin {
   void addQuantityForAProduct(Product product, Integer quantity);
   void printCoinsInMachine();
   void addChangeInsideMachine(Coin coin, Integer quantity);
+  void makeMachineAvailableForUsers();
+  void setInAdminMode();
 }

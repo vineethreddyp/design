@@ -1,37 +1,44 @@
 package impl;
 
 
+import datastore.StateMachineStore;
 import entity.Coin;
 import entity.Product;
 import interfaces.Admin;
-import interfaces.CoinManagement;
-import interfaces.ProductManagment;
 
 public class AdminImpl implements Admin {
 
-  private ProductManagment productManagment;
-  private CoinManagement coinManagement;
   private String name;
+  private StateMachineStore stateMachineStore;
 
-  public AdminImpl(String name, ProductManagment productManagment, CoinManagement coinManagement) {
+  public AdminImpl(String name, StateMachineStore stateMachineStore) {
     this.name = name;
-    this.productManagment = productManagment;
-    this.coinManagement = coinManagement;
+    this.stateMachineStore = stateMachineStore;
   }
 
   @Override
   public void addQuantityForAProduct(Product product, Integer quantity) {
-    productManagment.addQuantity(product,quantity);
+    stateMachineStore.getProductInventoryManagement().addQuantity(product,quantity);
   }
 
   @Override
   public void printCoinsInMachine() {
-    coinManagement.displayQuantityOfItems();
+    stateMachineStore.getCoinInventoryManagement().displayQuantityOfItems();
   }
 
   @Override
   public void addChangeInsideMachine(Coin coin, Integer quantity) {
-    coinManagement.addQuantity(coin,quantity);
+    stateMachineStore.getCoinInventoryManagement().addQuantity(coin,quantity);
+  }
+
+  @Override
+  public void makeMachineAvailableForUsers() {
+    stateMachineStore.setIdleState();
+  }
+
+  @Override
+  public void setInAdminMode() {
+    stateMachineStore.setAdminState();
   }
 
 
