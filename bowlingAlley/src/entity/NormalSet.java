@@ -18,8 +18,6 @@ public class NormalSet implements Score, Set {
     this.trailList = new ArrayList<>();
   }
 
-
-
   @Override
   public Integer getScore() {
     Integer score = 0;

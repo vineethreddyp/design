@@ -92,6 +92,7 @@ public class Lane {
   }
 
   public void reset(){
+    System.out.println("Lane Reset Complete");
     pinsPresent = 10;
     playerList = new ArrayList<>();
   }

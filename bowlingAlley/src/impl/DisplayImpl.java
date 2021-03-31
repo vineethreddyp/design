@@ -7,8 +7,6 @@ import java.util.stream.Collectors;
 
 public class DisplayImpl implements Diplay {
 
-  String displayString;
-
   @Override
   public void update(Lane lane) {
   System.out.print("\nDisplay Board : \n");
@@ -25,9 +23,4 @@ public class DisplayImpl implements Diplay {
     System.out.println( "cumulative score: " +  player.getScore());
   }
 
-
-  @Override
-  public void display() {
-    System.out.println(displayString);
-  }
 }
