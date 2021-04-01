@@ -1,2 +1,2 @@
-# design
-OO Sytem Designs in JAVA.
+# designs
+OO System Designs in JAVA.
