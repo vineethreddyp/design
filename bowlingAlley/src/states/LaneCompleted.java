@@ -19,7 +19,7 @@ public class LaneCompleted implements LaneState {
 
   @Override
   public void bowl() {
-    System.out.println("Invalid operation.");
+    System.out.println("Invalid operation. Game is already Complete");
   }
 
   @Override
@@ -30,7 +30,6 @@ public class LaneCompleted implements LaneState {
 
   @Override
   public void reset() {
-    lane.reset();
-    lane.setCurrentState(lane.getIdleState());
+    lane.resetPinsPlayers();
   }
 }

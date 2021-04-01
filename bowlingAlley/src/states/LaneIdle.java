@@ -26,10 +26,11 @@ public class LaneIdle implements LaneState {
   @Override
   public void startGame() {
     lane.setCurrentState(lane.getOnGoingState());
+    System.out.println("Started Game in Lane: " + lane.getName());
   }
 
   @Override
   public void reset() {
-    lane.reset();
+    lane.resetPinsPlayers();
   }
 }

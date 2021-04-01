@@ -15,14 +15,30 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Bowling Alley!");
         BowlingAlley bowlingAlley = generateBowlingAlley();
-        Lane lane = bowlingAlley.getLaneList().get(0);
-        addPlayersToLane(lane);
-        addDisplayToLane(lane);
-        lane.startGame();
-        while (!lane.completed()){
-            lane.bowl();
+        Lane lane1 = bowlingAlley.getLaneList().get(0);
+        addPlayersToLane(lane1);
+        addDisplayToLane(lane1);
+        lane1.startGame();
+        while (!lane1.completed()){
+            lane1.bowl();
         }
-        lane.reset();
+        lane1.reset();
+
+        Lane lane2 = bowlingAlley.getLaneList().get(1);
+        addPlayersToLane(lane2);
+        addDisplayToLane(lane2);
+        lane2.startGame();
+        while (!lane2.completed()){
+            lane2.bowl();
+        }
+        lane2.reset();
+        addPlayersToLane(lane2);
+        lane2.startGame();
+        while (!lane2.completed()){
+            lane2.bowl();
+        }
+        lane2.reset();
+
         System.out.println("Bowling Alley Done");
     }
 
@@ -40,8 +56,9 @@ public class Main {
 
     private static BowlingAlley generateBowlingAlley(){
         BowlingAlley bowlingAlley = new BowlingAlley();
-        Lane lane = new Lane(10);
+        Lane lane = new Lane("1",10);
         bowlingAlley.addLane(lane);
+        bowlingAlley.addLane(new Lane("2",10));
         return bowlingAlley;
     }
 

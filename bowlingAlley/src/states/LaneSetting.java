@@ -8,7 +8,6 @@ public class LaneSetting implements LaneState {
 
   private Lane lane;
 
-
   public LaneSetting(Lane lane){
     this.lane = lane;
   }

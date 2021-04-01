@@ -51,8 +51,7 @@ public class LaneOnGoing implements LaneState {
 
   @Override
   public void reset() {
-    lane.reset();
-    lane.setCurrentState(lane.getIdleState());
+    lane.resetPinsPlayers();
   }
 
 }

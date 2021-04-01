@@ -13,6 +13,7 @@ import states.LaneSetting;
 public class Lane {
 
   private List<Diplay> displayList;
+  private String name;
   private LaneState idleState;
   private LaneState onGoingState;
   private LaneState currentState;
@@ -21,6 +22,24 @@ public class Lane {
   private Integer pinsPresent;
   private Integer maxPins;
   private List<Player> playerList;
+
+
+  public Lane(String name,Integer maxPins){
+    this.maxPins = maxPins;
+    this.name = name;
+    playerList = new ArrayList<>();
+    idleState =  new LaneIdle(this);
+    onGoingState = new LaneOnGoing(this);
+    settingState = new LaneSetting(this);
+    completedState = new LaneCompleted(this);
+    pinsPresent = maxPins;
+    displayList = new ArrayList<>();
+    currentState = idleState;
+  }
+
+  public String getName() {
+    return name;
+  }
 
   public LaneState getIdleState() {
     return idleState;
@@ -55,18 +74,6 @@ public class Lane {
     pinsPresent = pins;
   }
 
-  public Lane(Integer maxPins){
-    this.maxPins = maxPins;
-    playerList = new ArrayList<>();
-    idleState =  new LaneIdle(this);
-    onGoingState = new LaneOnGoing(this);
-    settingState = new LaneSetting(this);
-    completedState = new LaneCompleted(this);
-    pinsPresent = maxPins;
-    displayList = new ArrayList<>();
-    currentState = idleState;
-  }
-
   public void setCurrentState(LaneState currentState) {
     this.currentState = currentState;
     if(currentState.equals(settingState)){
@@ -82,7 +89,6 @@ public class Lane {
   public void startGame(){
     currentState.startGame();
   }
-
 
   public void registerDisplay(Diplay diplay){
     displayList.add(diplay);
@@ -105,9 +111,13 @@ public class Lane {
   }
 
   public void reset(){
-    System.out.println("Lane Reset Complete");
-    pinsPresent = maxPins;
-    playerList = new ArrayList<>();
+    currentState.reset();
   }
 
+  public void resetPinsPlayers(){
+    System.out.println("Lane " + name + " Reset Complete");
+    pinsPresent = maxPins;
+    playerList = new ArrayList<>();
+    currentState = idleState;
+  }
 }
