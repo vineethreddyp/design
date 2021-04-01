@@ -2,9 +2,9 @@ package states;
 
 import impl.Lane;
 import interfaces.Player;
-import interfaces.State;
+import interfaces.LaneState;
 
-public class LaneIdle implements State {
+public class LaneIdle implements LaneState {
 
   private Lane lane;
 
@@ -19,7 +19,7 @@ public class LaneIdle implements State {
 
   @Override
   public void bowl() {
-    System.out.println("Invalid operation");
+    System.out.println("Invalid operation. Please start the game");
   }
 
 
@@ -30,6 +30,6 @@ public class LaneIdle implements State {
 
   @Override
   public void reset() {
-    System.out.println("Already Idle");
+    lane.reset();
   }
 }

@@ -12,10 +12,12 @@ public class NormalSet implements Score, Set {
 
   private boolean isComplete;
   private List<Trail> trailList;
+  private int maxPins;
 
-  public NormalSet(){
+  public NormalSet(int maxPins){
     this.isComplete = false;
     this.trailList = new ArrayList<>();
+    this.maxPins = maxPins;
   }
 
   @Override
@@ -37,33 +39,38 @@ public class NormalSet implements Score, Set {
     return isComplete;
   }
 
+
   @Override
   public void bowled(Integer pinsHit) {
-    Integer maxBalls = 10;
-    if(pinsHit.equals(maxBalls)){
-      trailList.add(new Trail(pinsHit, new StrikeScoreType()));
-      isComplete = true;
-      return;
-    }
 
-    Integer totalHits = 0;
-    for(Trail trail : trailList){
-      totalHits = totalHits  + trail.getScore();
-    }
+    int trailCount = trailList.size();
+    switch (trailCount){
+      case 0:
+        if(pinsHit.equals(maxPins)){
+          trailList.add(new Trail(pinsHit, new StrikeScoreType()));
+          isComplete = true;
+        }
+        else {
+          trailList.add(new Trail(pinsHit, new NormalScoreType()));
+        }
+        break;
 
-    if(totalHits + pinsHit == maxBalls){
-      trailList.add(new Trail(pinsHit, new SpareScoreType()));
-      isComplete = true;
-    }
-    else {
-      trailList.add(new Trail(pinsHit, new NormalScoreType()));
-    }
+      case 1:
+        int alreadyHitPins = trailList.get(0).getPinsHit();
+        if(alreadyHitPins + pinsHit == maxPins){
+          trailList.add(new Trail(pinsHit, new SpareScoreType()));
+        }
+        else {
+          trailList.add(new Trail(pinsHit, new NormalScoreType()));
+        }
+        isComplete = true;
+        break;
 
-    if(trailList.size() == 2){
-      isComplete = true;
+      default:
+        System.out.println("Exception here");
     }
-
-
 
   }
+
+
 }

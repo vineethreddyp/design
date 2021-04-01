@@ -2,9 +2,10 @@ package impl;
 
 import interfaces.Diplay;
 import interfaces.Player;
-import interfaces.State;
+import interfaces.LaneState;
 import java.util.ArrayList;
 import java.util.List;
+import states.LaneCompleted;
 import states.LaneIdle;
 import states.LaneOnGoing;
 import states.LaneSetting;
@@ -12,28 +13,38 @@ import states.LaneSetting;
 public class Lane {
 
   private List<Diplay> displayList;
-  private State idleState;
-  private State onGoingState;
-  private State currentState;
-  private State settingState;
+  private LaneState idleState;
+  private LaneState onGoingState;
+  private LaneState currentState;
+  private LaneState settingState;
+  private LaneState completedState;
   private Integer pinsPresent;
+  private Integer maxPins;
   private List<Player> playerList;
 
-  public State getIdleState() {
+  public LaneState getIdleState() {
     return idleState;
   }
 
-  public State getOnGoingState() {
+  public LaneState getOnGoingState() {
     return onGoingState;
   }
 
-  public State getSettingState() {
+  public LaneState getSettingState() {
     return settingState;
+  }
+
+  public LaneState getCompletedState() {
+    return completedState;
   }
 
   public void resetPins() {
     System.out.println("Resetting pins");
-    pinsPresent = 10;
+    pinsPresent = maxPins;
+  }
+
+  public Integer getMaxPins() {
+    return maxPins;
   }
 
   public Integer getPinsPresent() {
@@ -44,17 +55,19 @@ public class Lane {
     pinsPresent = pins;
   }
 
-  public Lane(){
+  public Lane(Integer maxPins){
+    this.maxPins = maxPins;
     playerList = new ArrayList<>();
     idleState =  new LaneIdle(this);
     onGoingState = new LaneOnGoing(this);
     settingState = new LaneSetting(this);
-    pinsPresent = 10;
+    completedState = new LaneCompleted(this);
+    pinsPresent = maxPins;
     displayList = new ArrayList<>();
     currentState = idleState;
   }
 
-  public void setCurrentState(State currentState) {
+  public void setCurrentState(LaneState currentState) {
     this.currentState = currentState;
     if(currentState.equals(settingState)){
       resetPins(); // hack here
@@ -93,7 +106,7 @@ public class Lane {
 
   public void reset(){
     System.out.println("Lane Reset Complete");
-    pinsPresent = 10;
+    pinsPresent = maxPins;
     playerList = new ArrayList<>();
   }
 

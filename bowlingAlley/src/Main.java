@@ -32,26 +32,26 @@ public class Main {
     }
 
     private static void addPlayersToLane(Lane lane) {
-        Player player1 = new PlayerImpl("vineeth",generateSetList());
-        Player player2 = new PlayerImpl("avinash",generateSetList());
+        Player player1 = new PlayerImpl("vineeth",generateSetList(lane.getMaxPins()));
+        Player player2 = new PlayerImpl("avinash",generateSetList(lane.getMaxPins()));
         lane.addPlayer(player1);
         lane.addPlayer(player2);
     }
 
-
     private static BowlingAlley generateBowlingAlley(){
         BowlingAlley bowlingAlley = new BowlingAlley();
-        Lane lane = new Lane();
+        Lane lane = new Lane(10);
         bowlingAlley.addLane(lane);
         return bowlingAlley;
     }
-    private static List<Set> generateSetList() {
+
+    private static List<Set> generateSetList(Integer maxPins) {
         int i;
         List<Set> setList = new ArrayList<>();
         for(i=0;i<9;i++){
-            setList.add(new NormalSet());
+            setList.add(new NormalSet(maxPins));
         }
-        setList.add(new FinalSet());
+        setList.add(new FinalSet(maxPins));
         return setList;
     }
 }

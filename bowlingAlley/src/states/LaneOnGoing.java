@@ -2,11 +2,11 @@ package states;
 
 import impl.Lane;
 import interfaces.Player;
-import interfaces.State;
+import interfaces.LaneState;
 import java.security.SecureRandom;
 import java.util.Random;
 
-public class LaneOnGoing implements State {
+public class LaneOnGoing implements LaneState {
 
   private Lane lane;
   private Random random;
@@ -37,6 +37,10 @@ public class LaneOnGoing implements State {
     }
     else if(lane.getPinsPresent() == 0){
       lane.setCurrentState(lane.getSettingState());
+    }
+
+    if(lane.completed()){
+      lane.setCurrentState(lane.getCompletedState());
     }
   }
 

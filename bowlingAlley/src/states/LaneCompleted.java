@@ -1,21 +1,20 @@
 package states;
 
 import impl.Lane;
-import interfaces.Player;
 import interfaces.LaneState;
+import interfaces.Player;
 
-public class LaneSetting implements LaneState {
+public class LaneCompleted implements LaneState {
 
   private Lane lane;
 
-
-  public LaneSetting(Lane lane){
+  public LaneCompleted(Lane lane){
     this.lane = lane;
   }
 
   @Override
   public void addPlayer(Player player) {
-    System.out.println("Invalid operation.");
+    System.out.println("Invalid operation. Player cannot be added.");
   }
 
   @Override
@@ -23,14 +22,15 @@ public class LaneSetting implements LaneState {
     System.out.println("Invalid operation.");
   }
 
-
   @Override
   public void startGame() {
-    System.out.println("Invalid operation.");
+    // use to start game again.
+    System.out.println("Invalid operation. Reset the game.");
   }
 
   @Override
   public void reset() {
-    System.out.println("Invalid operation.");
+    lane.reset();
+    lane.setCurrentState(lane.getIdleState());
   }
 }

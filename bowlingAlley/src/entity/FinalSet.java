@@ -11,10 +11,12 @@ public class FinalSet implements Set {
 
   private boolean isComplete;
   private List<Trail> trailList;
+  private int maxPins;
 
-  public FinalSet(){
+  public FinalSet(int maxPins){
     this.isComplete = false;
     this.trailList = new ArrayList<>();
+    this.maxPins = maxPins;
   }
 
   @Override
@@ -24,28 +26,28 @@ public class FinalSet implements Set {
 
   @Override
   public void bowled(Integer pinsHit) {
-    int maxBalls = 10;
     int trailCount = trailList.size();
     switch (trailCount){
       case 0:
-        if(pinsHit.equals(maxBalls)){
+        if(pinsHit.equals(maxPins)){
           trailList.add(new Trail(pinsHit, new StrikeScoreType()));
-          return;
         }
         else {
           trailList.add(new Trail(pinsHit, new NormalScoreType()));
         }
+        break;
+
       case 1:
         int alreadyHitPins = trailList.get(0).getPinsHit();
-        if(alreadyHitPins == maxBalls){
-          if(pinsHit.equals(maxBalls)){
+        if(alreadyHitPins == maxPins){
+          if(pinsHit.equals(maxPins)){
             trailList.add(new Trail(pinsHit, new StrikeScoreType()));
             return;
           }
         }
         else {
 
-          if(alreadyHitPins + pinsHit == maxBalls){
+          if(alreadyHitPins + pinsHit == maxPins){
             trailList.add(new Trail(pinsHit, new SpareScoreType()));
           }
           else {
@@ -56,7 +58,7 @@ public class FinalSet implements Set {
         return;
 
       case 2:
-        if(pinsHit.equals(maxBalls)){
+        if(pinsHit.equals(maxPins)){
           trailList.add(new Trail(pinsHit, new StrikeScoreType()));
           return;
         }

@@ -1,7 +1,6 @@
 package interfaces;
 
-public interface State {
-
+public interface LaneState {
   void addPlayer(Player player);
   void bowl();
   void startGame();
