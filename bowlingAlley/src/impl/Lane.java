@@ -22,6 +22,7 @@ public class Lane {
   private Integer pinsPresent;
   private Integer maxPins;
   private List<Player> playerList;
+  private Integer playerActive;
 
 
   public Lane(String name,Integer maxPins){
@@ -35,6 +36,7 @@ public class Lane {
     pinsPresent = maxPins;
     displayList = new ArrayList<>();
     currentState = idleState;
+    playerActive = 0;
   }
 
   public String getName() {
@@ -86,6 +88,10 @@ public class Lane {
     currentState.addPlayer(player);
   }
 
+  public Integer getPlayerActive() {
+    return playerActive;
+  }
+
   public void startGame(){
     currentState.startGame();
   }
@@ -119,5 +125,9 @@ public class Lane {
     pinsPresent = maxPins;
     playerList = new ArrayList<>();
     currentState = idleState;
+  }
+
+  public void nextPlayer() {
+    playerActive = (playerActive + 1)%playerList.size();
   }
 }

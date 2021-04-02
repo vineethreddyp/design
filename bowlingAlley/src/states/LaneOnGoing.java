@@ -10,13 +10,10 @@ public class LaneOnGoing implements LaneState {
 
   private Lane lane;
   private Random random;
-  private Integer playerActive;
 
   public LaneOnGoing(Lane lane){
     this.lane = lane;
     random = new SecureRandom();
-    playerActive = 0;
-
   }
 
   @Override
@@ -26,13 +23,14 @@ public class LaneOnGoing implements LaneState {
 
   @Override
   public void bowl() {
+    Integer playerActive = lane.getPlayerActive();
     Player activePlayer = lane.getPlayerList().get(playerActive);
     Integer pinsHit = random.nextInt(lane.getPinsPresent() +1);
     activePlayer.bowlRolled(pinsHit);
     lane.setPins(lane.getPinsPresent()-pinsHit);
     lane.notifyObservers();
     if(activePlayer.isTurnComplete()){
-      playerActive = (playerActive + 1)%lane.getPlayerList().size();
+      lane.nextPlayer();
       lane.setCurrentState(lane.getSettingState());
     }
     else if(lane.getPinsPresent() == 0){

@@ -55,17 +55,19 @@ public class FinalSet implements Set {
             isComplete = true;
           }
         }
-        return;
+        break;
 
       case 2:
         if(pinsHit.equals(maxPins)){
           trailList.add(new Trail(pinsHit, new StrikeScoreType()));
-          return;
         }
         else {
-          trailList.add(new Trail(pinsHit, new StrikeScoreType()));
+          trailList.add(new Trail(pinsHit, new NormalScoreType()));
         }
         isComplete = true;
+      break;
+      default:
+        System.out.println("Some exception here");
     }
 
 
