@@ -2,14 +2,25 @@ package dto;
 
 public class Move {
 
-  public Position source;
-  public Position destination;
-  public boolean isKillMove;
+  private Box source;
+  private Box destination;
+  private boolean isKillMove;
 
-  public Move(boolean isKillMove) {
+  public Move(Box source, Box destination, boolean isKillMove) {
+    this.source = source;
+    this.destination = destination;
     this.isKillMove = isKillMove;
   }
 
-  public Move() {
+  public Box getSource() {
+    return source;
+  }
+
+  public Box getDestination() {
+    return destination;
+  }
+
+  public boolean isKillMove() {
+    return isKillMove;
   }
 }

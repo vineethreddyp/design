@@ -1,5 +1,6 @@
 package models;
 
+import dto.Action;
 import dto.Box;
 import dto.Move;
 import dto.MoveLog;
@@ -31,7 +32,7 @@ public class Game {
     moveLog = new MoveLog();
   }
 
-  void startGame(){
+  public void startGame(){
     gameStatus = GameStatus.ON_GOING;
     continuousFunction();
   }
@@ -40,10 +41,12 @@ public class Game {
   private void continuousFunction(){
     while(gameStatus.equals(GameStatus.ON_GOING)){
       displayPanel.display(board, activePlayerColor);
-      Move moveMade = getInputFromUser();
-      boolean moveValid = makeMove(moveMade);
+      Action actionMade = getInputFromUser();
+      boolean moveValid = makeMove(actionMade);
       if(moveValid)
         switchPlayer();
+      else
+        System.out.println("Invalid move. Try again.....");
     }
   }
 
@@ -54,21 +57,23 @@ public class Game {
     else activePlayerColor = Color.WHITE;
   }
 
-  private Move getInputFromUser() {
+  private Action getInputFromUser() {
     Scanner scanner = new Scanner(System.in);
     Position sourcePosition = new Position();
     Position destPosition = new Position();
-    sourcePosition.x = scanner.nextInt();
-    sourcePosition.y = scanner.nextInt();
-    destPosition.x = scanner.nextInt();
-    destPosition.y = scanner.nextInt();
-    Move move = new Move();
-    move.source = sourcePosition;
-    move.destination = destPosition;
-    return move;
+    String input = scanner.nextLine();
+    String[] numbers = input.split(" ");
+    sourcePosition.x = Integer.parseInt(numbers[0]);
+    sourcePosition.y = Integer.parseInt(numbers[1]);
+    destPosition.x = Integer.parseInt(numbers[2]);
+    destPosition.y = Integer.parseInt(numbers[3]);
+    Action action = new Action();
+    action.source = sourcePosition;
+    action.destination = destPosition;
+    return action;
   }
 
-  private boolean makeMove(Move moveMade) {
+  private boolean makeMove(Action moveMade) {
     Box sourceBox = board.getBox(moveMade.source.x, moveMade.source.y);
     Box destBox = board.getBox(moveMade.destination.x, moveMade.destination.y);
     Piece sourcePiece = sourceBox.getPiece();
@@ -83,7 +88,7 @@ public class Game {
     boolean isMovePossible = sourcePiece.isMovePossible(sourceBox, destBox);
     if(isMovePossible){
       boolean killMove = Objects.nonNull(destinationPiece);
-      Move move = new Move(killMove);
+      Move move = new Move(new Box(sourceBox), new Box(destBox),killMove);
       moveLog.addMove(move);
       sourceBox.setPiece(null);
       destBox.setPiece(sourcePiece);

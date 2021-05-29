@@ -11,6 +11,8 @@ public class King extends Piece{
 
   @Override
   public boolean isMovePossible(Box sourcePosition, Box destPosition) {
-    return false;
+    int absXDiff = Math.abs(sourcePosition.x-destPosition.x);
+    int absYDiff = Math.abs(sourcePosition.y-destPosition.y);
+    return (absXDiff<=1 && absYDiff<=1);
   }
 }

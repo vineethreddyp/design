@@ -3,10 +3,10 @@ package models;
 import dto.Box;
 import enums.Color;
 
-public class Rook extends Piece {
+public class Knight extends Piece {
 
-  public Rook(Color color) {
-    super(color, "R");
+  public Knight(Color color) {
+    super(color, "N");
   }
 
   @Override
